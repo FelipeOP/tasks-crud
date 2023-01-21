@@ -1,0 +1,47 @@
+{{#if tasks}}
+<table class="table table-bordered table-hover text-center">
+    <thead class="table-dark">
+        <tr>
+            <th>#</th>
+            <th>Done</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Options</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{#each tasks}}
+        <tr>
+            <td>{{@index}}</td>
+            {{!-- Submit form on click --}}
+
+            <td>
+                <form action="/tasks/{{_id}}/toggleDone" method="get">
+                    <input class="form-check-input" type="checkbox" name="done" {{#if done}}checked{{/if}}
+                        onclick="this.form.submit()">
+                </form>
+            </td>
+            <td>{{title}}</td>
+            <td>{{description}}</td>
+            <td>
+                <a class="btn btn-danger" href="/tasks/{{_id}}/delete">Delete</a>
+                <a class="btn btn-outline-dark" href="/tasks/{{_id}}/edit">Update</a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+
+</table>
+{{else}}
+<div class="h-100 d-flex align-items-center justify-content-center">
+    <div class="text-center text-white">
+        <h1>No tasks</h1>
+        <img src="https://emojipedia-us.s3.amazonaws.com/source/microsoft-teams/337/timer-clock_23f2-fe0f.png"
+            srcset="https://emojipedia-us.s3.amazonaws.com/source/microsoft-teams/337/timer-clock_23f2-fe0f.png 2x"
+            alt="Temporizador en Microsoft Teams 1.0" width="120" height="120">
+    </div>
+
+</div>
+
+{{/if}}
